@@ -7,7 +7,7 @@ void main() {
 
 	
 
-	int clockDivisionTarget = "Click Galileo"/500000;
+	int clockDivisionTarget = "Clock Galileo"/1000;
 	int clockDivisionCount = 0;
 
 
@@ -23,7 +23,7 @@ void main() {
 			sendInterruption = false;
 		}
 		else{
-			if(clockDivisionCount == clockDivisionTarget){
+			if(clockDivisionCount >= clockDivisionTarget){
 				//Pega o valor do sensor
 				heartBeatArray.add(sensorImput.getValue());
 				clockDivisionCount=0;
