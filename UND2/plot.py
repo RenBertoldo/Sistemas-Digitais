@@ -15,7 +15,8 @@ def ServerConnect():
     udp.bind(orig)
     while True:
         msg, cliente = udp.recvfrom(1024)
-        ListADC.extend(float(msg))
+        print(msg)
+        ListADC.append(float(msg))
         
     udp.close()
 

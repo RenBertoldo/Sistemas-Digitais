@@ -75,7 +75,7 @@ def conta():
 try:
     
     ThreadCount = threading.Thread(target = conta)
-    #ThreadPWM = threading.Thread(target = WritePWM)
+    ThreadPWM = threading.Thread(target = WritePWM)
     ThreadADC = threading.Thread(target = ReadAdc)
     ThreadSend = threading.Thread(target = Sender)
     
