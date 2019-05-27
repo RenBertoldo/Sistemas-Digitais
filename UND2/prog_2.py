@@ -63,13 +63,16 @@ def Button():
         if(ButtonPin.read()!=0):
             continue
         else:
-            if(Liga == True)::
-                Liga = False
-                LedPin.write(0)
+            time.sleep(0.05)
+            if(ButtonPin.read()==1):
+               if(Liga == True):
+                    Liga = False
+                    LedPin.write(0)
+                else:
+                    Liga = True
+                    LedPin.write(1)
             else:
-                Liga = True
-                LedPin.write(1)
-    
+                continue    
 #count usa tempo em Microsegundos
 def conta():
     global Liga
