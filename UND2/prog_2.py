@@ -10,9 +10,15 @@ LedPWM = mraa.Pwm(3)
 LedPWM.period_ms(2)
 LedPWM.enable(True)
 
+ButtonPin = mraa.Gpio(23)
+ButtonPin.dir(mraa.DIR_IN)
+LedPin = mraa.Gpio(24)
+LedPin.dir(mraa.DIR_OUT)
+
+
 ListADC = []
 envia = False
-Liga = True
+Liga = False
 adc = 0.0
 maxValue = 0.0
 
@@ -51,13 +57,19 @@ def ReadAdc():
         time.sleep(0.0002)
         
 
-def WritePWM():
-    global adc,Liga
-    while Liga:
-        LedPWM.write(adc)
-        print("Valor escrito no PWM: ")
-        print(adc,"\n")
-
+def Button():
+    global Liga
+    while True:
+        if(ButtonPin.read()!=0):
+            continue
+        else:
+            if(Liga == True)::
+                Liga = False
+                LedPin.write(0)
+            else:
+                Liga = True
+                LedPin.write(1)
+    
 #count usa tempo em Microsegundos
 def conta():
     global Liga
@@ -75,12 +87,12 @@ def conta():
 try:
     
     ThreadCount = threading.Thread(target = conta)
-    ThreadPWM = threading.Thread(target = WritePWM)
+    ThreadButton = threading.Thread(target = Button)
     ThreadADC = threading.Thread(target = ReadAdc)
     ThreadSend = threading.Thread(target = Sender)
     
     ThreadADC.start()
-    #ThreadPWM.start()
+    ThreadButton.start()
     ThreadCount.start()
     ThreadSend.start()
 
