@@ -204,6 +204,14 @@ def ButtonOnOff():
                                 if Liga == True:
                                         Liga = False
 
+                                        LedPWM.write(1)
+                                        time.sleep(0.5)
+                                        LedPWM.write(0)
+                                        time.sleep(0.5)
+                                        LedPWM.write(1)
+                                        time.sleep(0.5)
+                                        LedPWM.write(0)
+
                                         # Desliga saidas
                                         bit10.write(0)
                                         bit9.write(0)
@@ -222,6 +230,15 @@ def ButtonOnOff():
                                         print "\nSistema OFF"
 
                                 else:
+
+                                        LedPWM.write(1)
+                                        time.sleep(0.5)
+                                        LedPWM.write(0)
+                                        time.sleep(0.5)
+                                        LedPWM.write(1)
+                                        time.sleep(0.5)
+                                        LedPWM.write(0)
+
                                         Liga = True
                                         print "\nSistema ON"
                                         print "Calculando. Por favor, aguarde."
