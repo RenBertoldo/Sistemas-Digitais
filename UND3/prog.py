@@ -57,7 +57,6 @@ bit10.dir(mraa.DIR_OUT)
 history= []#------------- Armazenar os valores medidos no ADC    
 max_history = 250 #------ Limitar o numero maximo de valores armazenados no historico
 
-envia = False #---------- Habilita o envio de dados para a FPGA 
 Liga = False #------------ Habilita o funcionamento do sistema
 
 adc = 0.0  #------------- Armazena o valor medido no sensor
@@ -66,7 +65,7 @@ heatBeats = 0 #---------- Armazena a contagem de batimentos cardiacos
 
 # Envia os dados para a FPGA
 def send():
-        global Liga,adc
+        global Liga,adc 
 
 
         while True:
@@ -81,6 +80,9 @@ def send():
                                 # Associando o valor de cada bit a um dos pinos
                                 # do menos para o mais significativo.
 
+                                print "[0 , 1, 2, 3, 4, 5, 6, 7, 8, 9]"
+                                print binary
+
                                 bit10.write(binary[9])
                                 bit9.write(binary[8])
                                 bit8.write(binary[7])
@@ -93,7 +95,7 @@ def send():
                                 bit1.write(binary[0])
 
                                 # Limitando a transmicao a frequencia de Nyquest.
-                                time.sleep(0.002)
+                                time.sleep(1)#0.002)
                         except:
                                 c = 0
 
@@ -116,8 +118,8 @@ def heatBeat():
                         if delta >= 10:
                                 bpm = round((heatBeats) * (60/delta)) 
 
-                                if Liga == True:
-                                        print ("BPM: ",bpm,"Tempo de medicao: ",round(delta),"Contagem de batimentos: ",heatBeats)
+                                #if Liga == True:
+                                        #print ("BPM: ",bpm,"Tempo de medicao: ",round(delta),"Contagem de batimentos: ",heatBeats)
 
                         # Apos 1 minuto, reinicia a medicao
                         if delta >= 60:
